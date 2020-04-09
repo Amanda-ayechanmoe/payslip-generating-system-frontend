@@ -1,0 +1,49 @@
+<nav class="nav d-flex shadow-sm p-2">
+  <h1>Payslip<span>GS</span></h1>
+  <div class="d-flex col justify-content-end align-items-center">
+    <button
+      class="btn btn-outline-danger d-flex"
+      onclick="window.location = ''"
+    >
+      <i class="mdi mdi-logout"></i
+      ><span class="d-none d-sm-block">Logout</span>
+    </button>
+  </div>
+</nav>
+<br /><br />
+<div class="container">
+  <div class="d-flex justify-content center align-items-center">
+    <table class="table" border="1" padding="5">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Issue Date</th>
+          <th>Basic Pay</th>
+          <th>Over Time</th>
+          <th>Bonus</th>
+          <th>Gross Pay</th>
+          <th>Tax</th>
+          <th>CPF</th>
+          <th>Net Pay</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ps of payslipList">
+          <td>{{ ps.payslipId }}</td>
+          <td>{{ ps.displayissueDate }}</td>
+          <td>{{ ps.basicPay }}</td>
+          <td>{{ ps.overTime }}</td>
+          <td>{{ ps.bonus }}</td>
+          <td>{{ ps.grossPay }}</td>
+          <td>{{ ps.tax }}</td>
+          <td>{{ ps.cpf }}</td>
+          <td>{{ ps.netPay }}</td>
+          <td>
+            <a [routerLink]="['/payslipDetail', ps.payslipId]">Detail</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

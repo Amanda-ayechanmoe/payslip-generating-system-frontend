@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <form [formGroup]="userLoginForm">
+      <div class="form-group">
+        <label>Username</label>
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="text"
+          name="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <button class="btn btn-success" type="submit" (click)="onSubmit()">
+        Login
+      </button>
+    </form>
+  </div>
+</div>

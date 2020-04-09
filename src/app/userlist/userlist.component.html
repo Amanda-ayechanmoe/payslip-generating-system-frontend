@@ -1,0 +1,65 @@
+<nav class="nav d-flex shadow-sm p-2">
+  <h1>Payslip<span>GS</span></h1>
+  <div class="d-flex col justify-content-end align-items-center">
+    <button
+      class="btn btn-outline-danger d-flex"
+      onclick="window.location = ''"
+    >
+      <i class="mdi mdi-logout"></i
+      ><span class="d-none d-sm-block">Logout</span>
+    </button>
+  </div>
+</nav>
+<br /><br />
+<div>
+  <a href="/createUser">New User</a>
+</div>
+<br />
+<div class="container">
+  <div class="d-flex justify-content center align-items-center">
+    <table class="table" border="1" padding="5">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Date of Birth</th>
+          <th>Department</th>
+          <th>Job Title</th>
+          <th>Start Date</th>
+          <th>Bank Account</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of UserList">
+          <td>{{ user.userId }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.address }}</td>
+          <td>{{ user.displayDoB }}</td>
+          <td>{{ user.department }}</td>
+          <td>{{ user.jobTitle }}</td>
+          <td>{{ user.displayStartDate }}</td>
+          <td>{{ user.bankAccount }}</td>
+          <td>
+            <a
+              [routerLink]="['/createPayslip', user.userId]"
+              style="margin-left: 10px"
+              >Payslip</a
+            >
+            <a
+              [routerLink]="['/editUser', user.userId]"
+              style="margin-left: 20px"
+              >Edit</a
+            >
+            <a
+              [routerLink]="['/deleteUser', user.userId]"
+              style="margin-left: 10px"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

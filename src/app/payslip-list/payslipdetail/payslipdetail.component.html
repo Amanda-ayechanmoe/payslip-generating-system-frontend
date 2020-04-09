@@ -1,0 +1,90 @@
+<nav class="nav d-flex shadow-sm p-2">
+  <h1>Payslip<span>GS</span></h1>
+  <div class="d-flex col justify-content-end align-items-center">
+    <button
+      class="btn btn-outline-danger d-flex"
+      onclick="window.location = ''"
+    >
+      <i class="mdi mdi-logout"></i
+      ><span class="d-none d-sm-block">Logout</span>
+    </button>
+  </div>
+</nav>
+<div class="d-flex px-3 py-3 h5 text-muted">
+	<div>View Payslip Details</div>
+	<div class="d-flex col justify-content-end">
+	<button class="d-flex btn text-success btn-download" id="cmd" (click)="onDownload() ">
+	<i class="mdi mdi-download"></i>
+	<span class="d-none d-sm-block">Download</span></button>
+	</div>
+	</div>
+<br /><br />
+<div class="container" id="content" #content>
+  <div class="d-flex justify-content-center">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1  col-md-offset-2">
+      <form [formGroup]="payslipDetailForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <p>{{ payslipDetailForm.value.name }}</p>
+        </div>
+        <div class="form-group">
+          <label for="name">Address</label>
+          <p>{{ payslipDetailForm.value.address }}</p>
+        </div>
+        <div class="form-group">
+          <label for="name">Date of Birth</label>
+          <p>{{ payslipDetailForm.value.dateOfBirth }}</p>
+        </div>
+        <div class="form-group">
+          <label for="name">Department</label>
+          <p>{{ payslipDetailForm.value.department }}</p>
+        </div>
+        <div class="form-group">
+          <label for="name">Job Title</label>
+          <p>{{ payslipDetailForm.value.jobTitle }}</p>
+        </div>
+        <div class="form-group">
+          <label for="name">Bank Account</label>
+          <p>{{ payslipDetailForm.value.bankAccount }}</p>
+        </div>
+        <div class="form-group">
+          <label for="name">Start Date</label>
+          <p>{{ payslipDetailForm.value.startDate }}</p>
+        </div>
+        <h2>Payslip</h2>
+        <div class="form-group">
+          <label for="issueDate">Issue Date</label>
+          <p>{{ payslipDetailForm.value.issueDate }}</p>
+        </div>
+        <div class="form-group">
+          <label for="basicPay">Basic Pay</label>
+          <p>{{ payslipDetailForm.value.basicPay }}</p>
+        </div>
+        <div class="form-group">
+          <label for="overTime">Over Time</label>
+          <p>{{ payslipDetailForm.value.overTime }}</p>
+        </div>
+        <div class="form-group">
+          <label for="bonus">Bonus</label>
+          <p>{{ payslipDetailForm.value.bonus }}</p>
+        </div>
+        <div class="form-group">
+          <label for="grossPay">Gross Pay</label>
+          <p>{{ payslipDetailForm.value.grossPay }}</p>
+        </div>
+        <div class="form-group">
+          <label for="tax">Tax</label>
+          <p>{{ payslipDetailForm.value.tax }}</p>
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <p>{{ payslipDetailForm.value.cpf }}</p>
+        </div>
+        <div class="form-group">
+          <label for="netPay">Net Pay</label>
+          <p>{{ payslipDetailForm.value.netPay }}</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
