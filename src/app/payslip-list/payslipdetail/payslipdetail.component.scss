@@ -1,0 +1,31 @@
+h1 {
+  font-family: "Rubik", sans-serif;
+  font-weight: bolder;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+h1 span {
+  color: purple;
+}
+
+.btn-download {
+border-bottom: 1px dotted limegreen;
+}
+
+.form-group {
+  display: flex;
+
+  label {
+    font-weight: bold;
+    &:after {
+      content: ':';
+    }
+  }
+
+  >* {
+    width: 50%;
+  }
+}

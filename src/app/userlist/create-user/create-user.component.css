@@ -6,3 +6,10 @@ h1 {
 h1 span {
   color: purple;
 }
+
+::ng-deep .modal-dialog {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

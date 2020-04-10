@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AdminLoginService {
   private BASE_URL = environment.baseUrl;
-  public isAuthorized$ = new BehaviorSubject(true);
+  public isAuthorized$ = new BehaviorSubject(false);
 
   constructor(
     private httpClient: HttpClient,

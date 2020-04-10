@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { UserService } from "src/app/service/user.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { User } from "src/app/model/user.model";
+import { Location } from '@angular/common';
 
 @Component({
   selector: "app-edit-user",
@@ -18,7 +19,8 @@ export class EditUserComponent implements OnInit {
   constructor(
     public userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -67,5 +69,8 @@ export class EditUserComponent implements OnInit {
       this.router.navigate(["/userList"]);
       console.log(this.responseEditUser);
     });
+  }
+  back() {
+    this.location.back();
   }
 }

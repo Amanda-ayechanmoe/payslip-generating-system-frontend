@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from "@angular/forms";
 import { UserService } from "src/app/service/user.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { User } from "src/app/model/user.model";
+import { Location } from '@angular/common';
 
 @Component({
   selector: "app-delete-user",
@@ -19,7 +20,8 @@ export class DeleteUserComponent implements OnInit {
   constructor(
     public userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -62,5 +64,9 @@ export class DeleteUserComponent implements OnInit {
       this.router.navigate(["/userList"]);
       console.log(response);
     });
+  }
+
+  back() {
+    this.location.back();
   }
 }

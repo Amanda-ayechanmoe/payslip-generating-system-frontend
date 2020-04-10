@@ -1,28 +1,19 @@
-<nav class="nav d-flex shadow-sm p-2">
-  <h1>Payslip<span>GS</span></h1>
-  <div class="d-flex col justify-content-end align-items-center">
-    <button
-      class="btn btn-outline-danger d-flex"
-      onclick="window.location = ''"
-    >
-      <i class="mdi mdi-logout"></i
-      ><span class="d-none d-sm-block">Logout</span>
-    </button>
-  </div>
-</nav>
+<app-header></app-header>
 <div class="d-flex px-3 py-3 h5 text-muted">
 	<div>View Payslip Details</div>
 	<div class="d-flex col justify-content-end">
 	<button class="d-flex btn text-success btn-download" id="cmd" (click)="onDownload() ">
 	<i class="mdi mdi-download"></i>
-	<span class="d-none d-sm-block">Download</span></button>
+	<span class="d-none d-sm-block">
+    <fa-icon [icon]="faDownload"></fa-icon>Download</span></button>
 	</div>
 	</div>
 <br /><br />
 <div class="container" id="content" #content>
   <div class="d-flex justify-content-center">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1  col-md-offset-2">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 col-sm-offset-1  col-md-offset-2">
       <form [formGroup]="payslipDetailForm">
+        <h2>User Info</h2>
         <div class="form-group">
           <label for="name">Name</label>
           <p>{{ payslipDetailForm.value.name }}</p>

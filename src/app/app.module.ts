@@ -21,7 +21,6 @@ import { AdminLoginService } from "./service/adminLogin.service";
 import { PayslipdetailComponent } from "./payslip-list/payslipdetail/payslipdetail.component";
 import { UserSharedService } from "./service/sharedservice";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgBootstrapModule } from './ngbootstrap.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InlineSVGModule } from 'ng-inline-svg';
 
@@ -38,7 +37,7 @@ import { InlineSVGModule } from 'ng-inline-svg';
     PayslipListComponent,
     HomeComponent,
     AdminloginComponent,
-    PayslipdetailComponent
+    PayslipdetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +46,6 @@ import { InlineSVGModule } from 'ng-inline-svg';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-
-    //*NgBootstrap*//
-    NgBootstrapModule,
     InlineSVGModule.forRoot({ baseUrl: '/assets/' })
   ],
   providers: [UserService, DatePipe, AdminLoginService, UserSharedService],

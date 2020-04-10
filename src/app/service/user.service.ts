@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   private BASE_URL = environment.baseUrl;
-  public isAuthorized$ = new BehaviorSubject(true);
+  public isAuthorized$ = new BehaviorSubject(false);
   userId: number;
 
   constructor(
@@ -88,9 +88,10 @@ export class UserService {
       .post<User[]>(`${this.BASE_URL}/api/userLogin/`, user)
       .pipe(
         map((response: User[]) => {
-          if (response && response.length && response[0])
+          if (response && response.length && response[0]) {
             this.isAuthorized$.next(true);
-          return response[0].userId;
+            return response[0].userId;
+          }
         }),
         catchError(error => {
           return throwError(error);
