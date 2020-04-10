@@ -1,41 +1,56 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserService } from "../service/user.service";
 import { Payslip } from "../model/payslip.model";
 import { User } from "../model/user.model";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-userlogin",
   templateUrl: "./userlogin.component.html",
-  styleUrls: ["./userlogin.component.css"]
+  styleUrls: ["./userlogin.component.scss"]
 })
-export class UserloginComponent implements OnInit {
+export class UserloginComponent implements OnInit, OnDestroy {
   userLoginForm: FormGroup;
-  responseUser: User[];
   user = new User();
-  userId: number;
-  constructor(public userService: UserService, private router: Router) {}
+  loading: boolean = false;
+  invalidLogin: boolean = false;
+  subscription = new Subscription();
+  constructor(public userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.userLoginForm = new FormGroup({
-      username: new FormControl(null),
-      password: new FormControl(null)
+      username: new FormControl('',Validators.required),
+      password: new FormControl('',Validators.required)
     });
+
+    this.subscription.add(this.userLoginForm.valueChanges.subscribe(() => {
+      this.invalidLogin = false;
+    }));
   }
 
-  onSubmit() {
-    this.user.username = this.userLoginForm.get("username").value;
-    this.user.password = this.userLoginForm.get("password").value;
-    //console.log(this.user);
-    this.userService.loginUser(this.user).subscribe((response: User[]) => {
-      this.responseUser = response;
-      for (const u of this.responseUser) {
-        this.userId = u.userId;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  async onSubmit() {
+    try {
+      this.loading = true;
+      this.user.username = this.userLoginForm.get("username").value;
+      this.user.password = this.userLoginForm.get("password").value;
+
+      const response = await this.userService.loginUser(this.user).toPromise();
+      if (!response) {
+        this.invalidLogin = true;
+        return;
       }
-      this.router.navigate(["/payslipList", this.userId]);
-      console.log(this.responseUser);
-      console.log(this.userId);
-    });
+
+      this.router.navigate(["/payslipList", response]);
+    } catch (ex) {
+      console.error(ex.message);
+    } finally {
+      this.loading = false;
+    }
   }
 }

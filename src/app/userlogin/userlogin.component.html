@@ -1,30 +1,33 @@
-<div class="container">
-  <div class="d-flex justify-content-center">
-    <form [formGroup]="userLoginForm">
-      <div class="form-group">
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          class="form-control"
-          formControlName="username"
-          placeholder="Enter your username"
-        />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input
-          type="text"
-          name="password"
-          class="form-control"
-          formControlName="password"
-          placeholder="Enter your password"
-        />
-      </div>
-
-      <button class="btn btn-success" type="submit" (click)="onSubmit()">
-        Login
-      </button>
-    </form>
-  </div>
+<div class="wrapper">
+  <div class="filter d-flex flex-column justify-content-center align-items-center">
+  <form class="card shadow border p-5 rounded" [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
+    <app-header class="mb-2" mode="prelogin"></app-header>
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" name="username" class="form-control" formControlName="username"
+        placeholder="Enter your username" />
+      <span class="error-msg">
+        {{(userLoginForm.controls['username'].touched || userLoginForm.controls['username'].dirty)&&
+        userLoginForm.controls['username'].hasError('required') ?
+        'Username is required' : '&nbsp;'}}
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="text" name="password" class="form-control" formControlName="password"
+        placeholder="Enter your password" type="password" />
+      <span class="error-msg">
+        {{(userLoginForm.controls['password'].touched || userLoginForm.controls['password'].dirty) &&
+        userLoginForm.controls['password'].hasError('required') ?
+        'Password is required' : '&nbsp;'}}
+      </span>
+    </div>
+    <span class="error-msg mb-3">
+      {{ invalidLogin ? 'Invalid Credentials' :'&nbsp;'}}
+    </span>
+    <button [disabled]="loading" class="btn btn-success" type="submit">
+      {{loading ? 'Logging...' : 'Login'}}
+    </button>
+  </form>
+</div>
 </div>

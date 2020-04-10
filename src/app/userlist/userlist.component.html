@@ -1,23 +1,18 @@
-<nav class="nav d-flex shadow-sm p-2">
-  <h1>Payslip<span>GS</span></h1>
-  <div class="d-flex col justify-content-end align-items-center">
-    <button
-      class="btn btn-outline-danger d-flex"
-      onclick="window.location = ''"
-    >
-      <i class="mdi mdi-logout"></i
-      ><span class="d-none d-sm-block">Logout</span>
-    </button>
-  </div>
-</nav>
-<br /><br />
-<div>
-  <a href="/createUser">New User</a>
+<app-header></app-header>
+<div class="d-flex justify-content-end p-3">
+  <button class="btn btn-success" (click)="routeToCreate()">
+    <fa-icon [icon]="faPlus"></fa-icon>
+    Create new user
+  </button>
 </div>
-<br />
 <div class="container">
   <div class="d-flex justify-content center align-items-center">
-    <table class="table" border="1" padding="5">
+    <div *ngIf="!UserList || !UserList.length" class="d-flex flex-column text-muted justify-content-center align-items-center w-100">
+      <div class="poster" inlineSVG="package.svg">
+      </div>
+      <div>There are no users. Start creating.</div>
+    </div>
+    <table *ngIf="UserList && UserList.length" class="table" border="1" padding="5">
       <thead>
         <tr>
           <th>ID</th>
@@ -42,21 +37,9 @@
           <td>{{ user.displayStartDate }}</td>
           <td>{{ user.bankAccount }}</td>
           <td>
-            <a
-              [routerLink]="['/createPayslip', user.userId]"
-              style="margin-left: 10px"
-              >Payslip</a
-            >
-            <a
-              [routerLink]="['/editUser', user.userId]"
-              style="margin-left: 20px"
-              >Edit</a
-            >
-            <a
-              [routerLink]="['/deleteUser', user.userId]"
-              style="margin-left: 10px"
-              >Delete</a
-            >
+            <a [routerLink]="['/createPayslip', user.userId]" style="margin-left: 10px">Payslip</a>
+            <a [routerLink]="['/editUser', user.userId]" style="margin-left: 20px">Edit</a>
+            <a [routerLink]="['/deleteUser', user.userId]" style="margin-left: 10px">Delete</a>
           </td>
         </tr>
       </tbody>

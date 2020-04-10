@@ -1,17 +1,5 @@
-<nav class="nav d-flex shadow-sm p-2">
-  <h1>Payslip<span>GS</span></h1>
-  <div class="d-flex col justify-content-end align-items-center">
-    <button
-      class="btn btn-outline-danger d-flex"
-      onclick="window.location = ''"
-    >
-      <i class="mdi mdi-logout"></i
-      ><span class="d-none d-sm-block">Logout</span>
-    </button>
-  </div>
-</nav>
-<br /><br />
-<div class="container">
+<app-header></app-header>
+<div class="container mt-1">
   <div class="d-flex justify-content-center">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <form [formGroup]="userRegisterForm">

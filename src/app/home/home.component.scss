@@ -1,0 +1,57 @@
+h1 {
+  font-family: sans-serif;
+  font-size: 50px;
+}
+.logo {
+  height: 30vh;
+  color: gray;
+}
+
+.landing-page {
+  height: 70vh;
+
+
+  i {
+    font-size: 70px;
+  }
+
+  .admin-login, .client-login {
+    height: 40vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    .filter {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0px;
+    }
+  }
+
+  .admin-login {
+    background: url("https://www.first-reit.com/images/abt_corp_info.png");
+
+    .filter {
+      background: linear-gradient(to top right,rgba(127, 50, 168, 0.8),gray) !important;
+
+      &:hover {
+        background: linear-gradient(to top right, rgb(127, 50, 168), gray) !important;
+      }
+    }
+  }
+
+  .client-login {
+    background: url("https://www.affordablebackgroundchecks.com/blog/wp-content/uploads/2018/03/Job-Interview.jpg");
+
+    .filter {
+      background: linear-gradient(to top right, rgba(50, 168, 82, 0.8),gray) !important;
+
+      &:hover {
+        background: linear-gradient(to top right, rgb(50, 168, 82), gray) !important;
+      }
+    }
+  }
+}
+
+fa-icon {
+  margin-left: 20px;
+}

@@ -10,25 +10,28 @@ import { PayslipListComponent } from "./payslip-list/payslip-list.component";
 import { AdminloginComponent } from "./adminlogin/adminlogin.component";
 import { HomeComponent } from "./home/home.component";
 import { PayslipdetailComponent } from "./payslip-list/payslipdetail/payslipdetail.component";
+import { AdminAuthGuard, UserAuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+
+  //**Employee Routes**//
+  { path: "userLogin", component: UserloginComponent},
+  { path: "payslipList/:userId", component: PayslipListComponent, canActivate: [UserAuthGuard] },
+  { path: "payslipDetail/:payslipId", component: PayslipdetailComponent, canActivate: [UserAuthGuard] },
+
+  //**Admin Routes**//
   { path: "adminLogin", component: AdminloginComponent },
-  { path: "userLogin", component: UserloginComponent },
-  { path: "payslipList/:userId", component: PayslipListComponent },
-  {
-    path: "payslipDetail/:payslipId",
-    component: PayslipdetailComponent
-  },
-  { path: "userList", component: UserlistComponent },
-  { path: "createUser", component: CreateUserComponent },
-  { path: "editUser/:userId", component: EditUserComponent },
-  { path: "deleteUser/:userId", component: DeleteUserComponent },
-  { path: "createPayslip/:userId", component: CreatePayslipComponent }
+  { path: "userList", component: UserlistComponent, canActivate: [AdminAuthGuard] },
+  { path: "createPayslip/:userId", component: CreatePayslipComponent, canActivate: [AdminAuthGuard] },
+  { path: "createUser", component: CreateUserComponent, canActivate: [AdminAuthGuard] },
+  { path: "editUser/:userId", component: EditUserComponent, canActivate: [AdminAuthGuard] },
+  { path: "deleteUser/:userId", component: DeleteUserComponent, canActivate: [AdminAuthGuard] },
+  { path: "**", redirectTo: "/" }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

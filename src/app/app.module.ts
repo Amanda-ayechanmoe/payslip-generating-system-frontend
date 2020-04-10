@@ -20,6 +20,10 @@ import { AdminloginComponent } from "./adminlogin/adminlogin.component";
 import { AdminLoginService } from "./service/adminLogin.service";
 import { PayslipdetailComponent } from "./payslip-list/payslipdetail/payslipdetail.component";
 import { UserSharedService } from "./service/sharedservice";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgBootstrapModule } from './ngbootstrap.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { InlineSVGModule } from 'ng-inline-svg';
 
 @NgModule({
   declarations: [
@@ -40,9 +44,15 @@ import { UserSharedService } from "./service/sharedservice";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+
+    //*NgBootstrap*//
+    NgBootstrapModule,
+    InlineSVGModule.forRoot({ baseUrl: '/assets/' })
   ],
   providers: [UserService, DatePipe, AdminLoginService, UserSharedService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

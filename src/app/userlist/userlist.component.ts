@@ -2,18 +2,25 @@ import { Component, OnInit } from "@angular/core";
 import { User } from "../model/user.model";
 import { UserService } from "../service/user.service";
 import { DatePipe } from "@angular/common";
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-userlist",
   templateUrl: "./userlist.component.html",
-  styleUrls: ["./userlist.component.css"],
+  styleUrls: ["./userlist.component.scss"],
   providers: [UserService]
 })
 export class UserlistComponent implements OnInit {
   UserList: User[];
   startDate: String;
+  faPlus = faPlus;
 
-  constructor(public userService: UserService, public datepipe: DatePipe) {}
+  constructor(
+    private userService: UserService,
+    public datepipe: DatePipe,
+    private router: Router
+    ) {}
 
   ngOnInit() {
     this.userService
@@ -38,5 +45,9 @@ export class UserlistComponent implements OnInit {
           console.log("something went wrong");
         }
       );
+  }
+
+  routeToCreate() {
+    this.router.navigateByUrl('/createUser')
   }
 }

@@ -1,12 +1,11 @@
-<nav class="nav d-flex shadow-sm p-2">
-  <h1>Payslip<span>GS</span></h1>
-  <div class="d-flex col justify-content-end align-items-center">
+<nav class="d-flex align-content-center p-2" [ngClass]="{'shadow-sm' : mode !== 'prelogin'}">
+  <div><h1>Payslip<span>GS</span></h1></div>
+  <div *ngIf="mode !== 'prelogin'" class="d-flex col justify-content-end align-items-center">
     <button
       class="btn btn-outline-danger d-flex"
-      onclick="window.location = ''"
+      (click)="logout()"
     >
-      <i class="mdi mdi-logout"></i
-      ><span class="d-none d-sm-block">Logout</span>
+      <fa-icon [icon]="faLogout"></fa-icon><span class="d-none d-sm-block">Logout</span>
     </button>
   </div>
 </nav>

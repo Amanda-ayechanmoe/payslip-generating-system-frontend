@@ -1,21 +1,21 @@
 <div class="logo d-flex justify-content-center align-items-end">
   <h1 class="font-weight-bold">Payslip<span style="color:purple;">GS</span></h1>
 </div>
-<div class="landing-page d-flex justify-content-center align-items-start">
+<div class="landing-page row no-gutters justify-content-center align-items-start">
   <div class="col-md-6 p-5">
-    <aside class="admin-login h3 card" (click)="routeToAdmin()">
-      <div class="p-5">
+    <div class="card admin-login p-0 pointer text-white shadow border">
+      <div class="p-5 filter h3 d-flex align-items-center" (click)="routeToAdmin()">
         Admin Login
-        <i class="mdi mdi-account-circle-outline"></i>
+        <fa-icon [icon]="faUsers" size="lg"></fa-icon>
       </div>
-    </aside>
+    </div>
   </div>
   <div class="col-md-6 p-5">
-    <aside class="client-login h3 card" (click)="routeToClient()">
-      <div class="p-5">
+    <div class="card client-login p-0 pointer text-white shadow border" (click)="routeToClient()">
+      <div class="p-5 filter h3 d-flex align-items-center" >
         Employee Login
-        <i class="mdi mdi-account-key-outline"></i>
+        <fa-icon [icon]="faUser" size="lg"></fa-icon>
       </div>
-    </aside>
+    </div>
   </div>
 </div>

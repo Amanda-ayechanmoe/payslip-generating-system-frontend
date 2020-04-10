@@ -1,18 +1,24 @@
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Observable, throwError } from "rxjs";
+import { Observable, throwError, BehaviorSubject } from "rxjs";
 import { User } from "../model/user.model";
 import { map, catchError } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { Payslip } from "../model/payslip.model";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
 })
 export class UserService {
   private BASE_URL = environment.baseUrl;
+  public isAuthorized$ = new BehaviorSubject(true);
   userId: number;
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) { }
 
   getAllUser(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${this.BASE_URL}/api/userList`).pipe(
@@ -82,7 +88,9 @@ export class UserService {
       .post<User[]>(`${this.BASE_URL}/api/userLogin/`, user)
       .pipe(
         map((response: User[]) => {
-          return response;
+          if (response && response.length && response[0])
+            this.isAuthorized$.next(true);
+          return response[0].userId;
         }),
         catchError(error => {
           return throwError(error);
@@ -112,5 +120,10 @@ export class UserService {
           return throwError(error);
         })
       );
+  }
+
+  logout() {
+    this.isAuthorized$.next(false);
+    this.router.navigateByUrl('/');
   }
 }

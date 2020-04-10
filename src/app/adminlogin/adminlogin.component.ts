@@ -1,40 +1,57 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { AdminLoginService } from "../service/adminLogin.service";
 import { Router } from "@angular/router";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Admin } from "../model/admin.model";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: "app-adminlogin",
   templateUrl: "./adminlogin.component.html",
-  styleUrls: ["./adminlogin.component.css"]
+  styleUrls: ["./adminlogin.component.scss"]
 })
-export class AdminloginComponent implements OnInit {
+export class AdminloginComponent implements OnInit, OnDestroy {
   adminLoginForm: FormGroup;
   admin = new Admin();
-  isValidAdmin: boolean;
-  vaildCheck: boolean;
-  constructor(public adminService: AdminLoginService, private router: Router) {}
+  loading: boolean = false;
+  invalidLogin: boolean = false;
+
+  subscription = new Subscription();
+  constructor(public adminService: AdminLoginService, private router: Router) { }
 
   ngOnInit() {
     this.adminLoginForm = new FormGroup({
-      username: new FormControl(null),
-      password: new FormControl(null)
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
+    this.subscription.add(this.adminLoginForm.valueChanges.subscribe(() => {
+      this.invalidLogin = false;
+    }));
   }
 
-  onSubmit() {
-    this.admin.username = this.adminLoginForm.get("username").value;
-    this.admin.password = this.adminLoginForm.get("password").value;
-    this.adminService.loginAdmin(this.admin).subscribe((respone: boolean) => {
-      this.isValidAdmin = respone;
-      console.log(this.isValidAdmin);
-      if (this.isValidAdmin == true) {
-        this.vaildCheck = true;
-        this.router.navigate(["/userList"]);
-      } else {
-        this.vaildCheck = false;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  async onSubmit() {
+    try {
+      this.loading = true;
+      this.adminLoginForm.markAllAsTouched();
+      if (!this.adminLoginForm.valid) {
+        return;
       }
-    });
+      this.admin.username = this.adminLoginForm.get("username").value;
+      this.admin.password = this.adminLoginForm.get("password").value;
+      const response = await this.adminService.loginAdmin(this.admin).toPromise();
+      if (!response) {
+        this.invalidLogin = true;
+        return;
+      }
+      this.router.navigate(["/userList"]);
+    } catch (ex) {
+      console.error(ex.message);
+    } finally {
+      this.loading = false;
+    }
   }
 }

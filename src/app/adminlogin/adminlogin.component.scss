@@ -1,0 +1,11 @@
+.wrapper {
+  background: url("https://www.first-reit.com/images/abt_corp_info.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .filter {
+    background: linear-gradient(to top right,rgba(127, 50, 168, 0.8),gray) !important;
+    height: 100%;
+    width: 100%;
+  }
+}
